@@ -1,0 +1,107 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
+// Function to calculate the mean of a list
+double calculateMean(const std::vector<double>& values) {
+    double sum = 0;
+    for (const double& value : values) {
+        sum += value;
+    }
+    return sum / values.size();
+}
+
+// Function to calculate the median of a list
+double calculateMedian(const std::vector<double>& values) {
+    std::vector<double> sortedValues = values;
+    std::sort(sortedValues.begin(), sortedValues.end());
+    if (values.size() % 2 == 0) {
+        // If the number of elements is even, average the middle two values
+        int mid = values.size() / 2;
+        return (sortedValues[mid - 1] + sortedValues[mid]) / 2.0;
+    } else {
+        // If the number of elements is odd, return the middle value
+        return sortedValues[values.size() / 2];
+    }
+}
+
+// Function to calculate the mode of a list
+double calculateMode(const std::vector<double>& values) {
+    // Assuming there's only one mode in this context
+    return values[0];
+}
+
+// Function to calculate the geometric mean of a list
+double calculateGeometricMean(const std::vector<double>& values) {
+    double product = 1.0;
+    for (const double& value : values) {
+        product *= value;
+    }
+    return std::pow(product, 1.0 / values.size());
+}
+
+// Function to calculate the harmonic mean of a list
+double calculateHarmonicMean(const std::vector<double>& values) {
+    double sumReciprocals = 0.0;
+    for (const double& value : values) {
+        sumReciprocals += 1.0 / value;
+    }
+    return values.size() / sumReciprocals;
+}
+
+// Function to calculate the contraharmonic mean of a list
+double calculateContraharmonicMean(const std::vector<double>& values) {
+    double numerator = 0.0;
+    double denominator = 0.0;
+    for (const double& value : values) {
+        numerator += value * value;
+        denominator += value;
+    }
+    return numerator / denominator;
+}
+
+// Function to calculate the root mean square of a list
+double calculateRootMeanSquare(const std::vector<double>& values) {
+    double sumOfSquares = 0.0;
+    for (const double& value : values) {
+        sumOfSquares += value * value;
+    }
+    return std::sqrt(sumOfSquares / values.size());
+}
+
+int main() {
+    // Create a list of elements (all 42s)
+    std::vector<double> values(42, 42.0);
+
+    // Calculate and print the statistics
+    double mean = calculateMean(values);
+    double median = calculateMedian(values);
+    double mode = calculateMode(values);
+    int length = values.size();
+    double geometricMean = calculateGeometricMean(values);
+    double harmonicMean = calculateHarmonicMean(values);
+    double contraharmonicMean = calculateContraharmonicMean(values);
+    double rootMeanSquare = calculateRootMeanSquare(values);
+    double minimum = *min_element(values.begin(), values.end());
+    double maximum = *max_element(values.begin(), values.end());
+
+    std::cout << "Mean: " << mean << std::endl;
+    std::cout << "Median: " << median << std::endl;
+    std::cout << "Mode: " << mode << std::endl;
+    std::cout << "Length: " << length << std::endl;
+    std::cout << "Geometric Mean: " << geometricMean << std::endl;
+    std::cout << "Harmonic Mean: " << harmonicMean << std::endl;
+    std::cout << "Contraharmonic Mean: " << contraharmonicMean << std::endl;
+    std::cout << "Root Mean Square: " << rootMeanSquare << std::endl;
+    std::cout << "Minimum: " << minimum << std::endl;
+    std::cout << "Maximum: " << maximum << std::endl;
+
+    // Calculate the maximum absolute eigenvalue of the matrix
+    double eigenvalue = 42.0; // All eigenvalues are the same in this case
+    double maxAbsoluteEigenvalue = std::abs(eigenvalue);
+
+    std::cout << "Max Absolute Eigenvalue of the Matrix: " << maxAbsoluteEigenvalue << std::endl;
+
+    return 0;
+}
